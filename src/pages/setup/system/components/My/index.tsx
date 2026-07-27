@@ -28,9 +28,11 @@ export default () => {
       setLoading(true);
       await editUserDataAPI({ ...values, id: user.id });
       message.success('🎉 修改用户信息成功');
-      setUser(values as User);
+      // 合并而非覆盖，保留 id/username 等原有字段，避免后续依赖这些字段的操作失败
+      setUser({ ...user, ...values });
     } catch (error) {
       console.error(error);
+    } finally {
       setLoading(false);
     }
   };

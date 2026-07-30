@@ -24,6 +24,7 @@ import warningSvg from './icon/warning.svg?raw';
 import checkSvg from './icon/check.svg?raw';
 import dangerSvg from './icon/danger.svg?raw';
 import imageSvg from './icon/image.svg?raw';
+import { widgets } from './widgetsPlugin';
 
 // 注册 batch 语言支持
 hljs.registerLanguage('batch', dos);
@@ -170,7 +171,6 @@ const material = (): BytemdPlugin => {
         handler: {
           type: 'action',
           click: (ctx) => {
-            // 触发图片选择弹窗
             const event = new CustomEvent('openMaterialModal', {
               detail: { ctx }
             });
@@ -184,6 +184,7 @@ const material = (): BytemdPlugin => {
 
 export default [
   videos(),
+  widgets(),
   gfm({ singleTilde: false }),
   markers(),
   gemoji(),

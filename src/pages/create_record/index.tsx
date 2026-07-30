@@ -29,7 +29,7 @@ export default () => {
 
   // 删除图片
   const handleDelImage = (data: string) => {
-    setImageList(imageList.filter((item) => item !== data));
+    setImageList((prev) => prev.filter((item) => item !== data));
   };
 
   const onSubmit = async () => {
@@ -152,7 +152,7 @@ export default () => {
           message.error('请输入有效的 HTTP/HTTPS 链接');
           return Promise.reject();
         }
-        setImageList([...imageList, inputUrl]);
+        setImageList((prev) => [...prev, inputUrl]);
         return Promise.resolve();
       },
     });
@@ -255,9 +255,9 @@ export default () => {
                 </div>
 
                 {imageList.length > 0 ? (
-                  <div className={`grid gap-3 ${imageList.length === 1 ? 'grid-cols-1' : imageList.length === 2 ? 'grid-cols-2' : imageList.length === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+                  <div className="grid grid-cols-2 gap-3">
                     {imageList.map((item, index) => (
-                      <div key={index} className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-100 shadow-sm image-container dark:border-strokedark dark:bg-boxdark-2 ${imageList.length === 1 ? 'aspect-video' : imageList.length === 3 && index === 0 ? 'col-span-2 aspect-video' : 'aspect-square'}`}>
+                      <div key={`${item}-${index}`} className="group relative aspect-square overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-100 shadow-sm image-container dark:border-strokedark dark:bg-boxdark-2">
                         <Image src={item} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" classNames={{ root: '!w-full !h-full' }} preview={true} />
                         <div className="absolute inset-0 flex items-center justify-center bg-black/45 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
                           <Tooltip title="移除图片">
@@ -274,6 +274,17 @@ export default () => {
                         </div>
                       </div>
                     ))}
+                    {imageList.length < 4 && (
+                      <Dropdown menu={dropdownItems} placement="bottom" trigger={['click']}>
+                        <button type="button" className="flex aspect-square w-full flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200/80 bg-slate-50 text-center transition-all hover:border-blue-300 hover:bg-blue-50 dark:border-strokedark dark:bg-boxdark-2 dark:hover:bg-blue-950/35 cursor-pointer">
+                          <span className="mb-2 grid h-10 w-10 place-items-center text-blue-500">
+                            <LuImagePlus size={22} />
+                          </span>
+                          <span className="text-xs font-medium text-gray-600 dark:text-gray-300">继续添加</span>
+                          <span className="mt-0.5 text-[11px] text-gray-400 dark:text-gray-500">还可加 {4 - imageList.length} 张</span>
+                        </button>
+                      </Dropdown>
+                    )}
                   </div>
                 ) : (
                   <Dropdown menu={dropdownItems} placement="bottom" trigger={['click']}>
@@ -297,7 +308,7 @@ export default () => {
         open={isMaterialModalOpen}
         onClose={() => setIsMaterialModalOpen(false)}
         onSelect={(url) => {
-          setImageList([...imageList, ...url]);
+          setImageList((prev) => [...prev, ...url].slice(0, 4));
         }}
       />
     </div>

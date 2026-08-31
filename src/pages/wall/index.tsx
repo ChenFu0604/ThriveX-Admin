@@ -546,13 +546,15 @@ export default function WallPage() {
                       prefix={<FiSearch className="text-slate-400" size={15} />}
                     />
                   </Form.Item>
-                  <Form.Item name="cateId" className="mb-0! w-full sm:w-28">
+                  <Form.Item name="cateId" className="mb-0! w-full sm:w-34">
                     <Select
                       allowClear
                       options={cateList}
                       fieldNames={{ label: 'name', value: 'id' }}
                       placeholder="分类"
                       suffixIcon={<FiTag className="text-slate-400" size={14} />}
+                      popupMatchSelectWidth={false}
+                      classNames={{ popup: { root: 'min-w-44!' } }}
                       className="w-full!"
                     />
                   </Form.Item>

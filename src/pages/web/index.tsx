@@ -595,48 +595,56 @@ export default () => {
         title={isMethod === 'edit' ? '编辑网站' : '新增网站'}
         open={modalVisible}
         onCancel={reset}
-        width={600}
+        width={640}
         footer={null}
       >
         <Spin spinning={editLoading}>
           <Form form={form} layout="vertical" size="large" initialValues={link} onFinish={onSubmit}>
-            <Form.Item label="网站标题" name="title" rules={[{ required: true, message: '网站标题不能为空' }]}>
-              <Input placeholder="ThriveX" />
-            </Form.Item>
+            <div className="grid gap-x-3 sm:grid-cols-2">
+              <Form.Item label="网站标题" name="title" rules={[{ required: true, message: '网站标题不能为空' }]} className="mb-4!">
+                <Input placeholder="ThriveX" />
+              </Form.Item>
 
-            <Form.Item label="网站描述" name="description" rules={[{ required: true, message: '网站描述不能为空' }]}>
-              <Input placeholder="记录前端、Python、Java点点滴滴" />
-            </Form.Item>
+              <Form.Item name="typeId" label="网站类型" rules={[{ required: true, message: '网站类型不能为空' }]} className="mb-4!">
+                <Select placeholder="请选择网站类型" allowClear>
+                  {typeList.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </div>
 
-            <Form.Item label="站长邮箱" name="email">
-              <Input placeholder="liuyuyang1024@yeah.net" />
-            </Form.Item>
+            <div className="grid gap-x-3 sm:grid-cols-2">
+              <Form.Item label="网站描述" name="description" rules={[{ required: true, message: '网站描述不能为空' }]} className="mb-4!">
+                <Input placeholder="记录前端、Python、Java点点滴滴" />
+              </Form.Item>
 
-            <Form.Item label="网站图标" name="image" rules={[{ required: true, message: '网站图标不能为空' }]}>
-              <Input placeholder="https://liuyuyang.net/logo.png" />
-            </Form.Item>
+              <Form.Item label="站长邮箱" name="email" className="mb-4!">
+                <Input placeholder="liuyuyang1024@yeah.net" />
+              </Form.Item>
+            </div>
 
-            <Form.Item label="网站链接" name="url" rules={[{ required: true, message: '网站链接不能为空' }, { validator: validateURL }]}>
-              <Input placeholder="https://liuyuyang.net/" />
-            </Form.Item>
+            <div className="grid gap-x-3 sm:grid-cols-2">
+              <Form.Item label="网站图标" name="image" rules={[{ required: true, message: '网站图标不能为空' }]} className="mb-4!">
+                <Input placeholder="https://liuyuyang.net/logo.png" />
+              </Form.Item>
 
-            <Form.Item label="订阅地址" name="rss" rules={[{ validator: validateURL }]}>
-              <Input placeholder="https://liuyuyang.net/api/rss" />
-            </Form.Item>
+              <Form.Item label="顺序" name="order" className="mb-4!">
+                <Input placeholder="请输入网站顺序（值越小越靠前）" />
+              </Form.Item>
+            </div>
 
-            <Form.Item name="typeId" label="网站类型" rules={[{ required: true, message: '网站类型不能为空' }]}>
-              <Select placeholder="请选择网站类型" allowClear>
-                {typeList.map((item) => (
-                  <Option key={item.id} value={item.id}>
-                    {item.name}
-                  </Option>
-                ))}
-              </Select>
-            </Form.Item>
+            <div className="grid gap-x-3 sm:grid-cols-2">
+              <Form.Item label="网站链接" name="url" rules={[{ required: true, message: '网站链接不能为空' }, { validator: validateURL }]} className="mb-4!">
+                <Input placeholder="https://liuyuyang.net/" />
+              </Form.Item>
 
-            <Form.Item label="顺序" name="order">
-              <Input placeholder="请输入网站顺序（值越小越靠前）" />
-            </Form.Item>
+              <Form.Item label="订阅地址" name="rss" rules={[{ validator: validateURL }]} className="mb-4!">
+                <Input placeholder="https://liuyuyang.net/api/rss" />
+              </Form.Item>
+            </div>
 
             <Form.Item className="mb-0">
               <Button type="primary" htmlType="submit" loading={btnLoading} className="w-full">
@@ -645,7 +653,7 @@ export default () => {
             </Form.Item>
           </Form>
         </Spin>
-      </Modal >
-    </div >
+      </Modal>
+    </div>
   );
 };

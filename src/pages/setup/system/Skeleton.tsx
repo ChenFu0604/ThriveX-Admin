@@ -9,7 +9,7 @@ export default function SystemSetupSkeleton() {
         <div className="lg:col-span-3 flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-strokedark dark:bg-boxdark">
           <div className="flex-1 overflow-y-auto">
             <div className="flex flex-col p-2 gap-0.5">
-              {[1, 2, 3, 4].map((item) => (
+              {[1, 2, 3, 4, 5, 6].map((item) => (
                 <div key={item} className="flex items-center gap-3 rounded-lg px-3 py-2.5">
                   <div className="skeleton h-8 w-8 shrink-0 rounded-lg" />
                   <div className="flex flex-1 flex-col gap-1">

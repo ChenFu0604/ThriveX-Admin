@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { BiGlobe, BiImage, BiLayout, BiShieldQuarter, BiUser } from 'react-icons/bi';
+import { BiGlobe, BiImage, BiLayout, BiShieldQuarter, BiUser, BiChat } from 'react-icons/bi';
 
 import Title from '@/components/Title';
 import My from './components/My';
 import System from './components/System';
 import Theme from './components/Theme';
+import RecordTheme from './components/Theme/components/RecordTheme';
 import Web from './components/Web';
 import Other from './components/Other';
 import File from './components/File';
@@ -25,7 +26,7 @@ export default () => {
   const [initialLoading, setInitialLoading] = useState<boolean>(true);
   const isFirstLoadRef = useRef<boolean>(true);
 
-  const validKeys = ['system', 'web', 'theme', 'my', 'file', 'other'];
+  const validKeys = ['system', 'web', 'theme', 'record', 'my', 'file', 'other'];
   const initialActive = tabFromUrl && validKeys.includes(tabFromUrl) ? tabFromUrl : 'system';
 
   const [active, setActive] = useState(initialActive);
@@ -69,6 +70,12 @@ export default () => {
       description: '背景图、打字机文本与布局风格',
       icon: <BiLayout />,
       key: 'theme',
+    },
+    {
+      title: '闪念配置',
+      description: '名称、头像与背景图展示',
+      icon: <BiChat />,
+      key: 'record',
     },
     {
       title: '个人配置',
@@ -159,6 +166,7 @@ export default () => {
             {active === 'system' && <System />}
             {active === 'web' && <Web />}
             {active === 'theme' && <Theme />}
+            {active === 'record' && <RecordTheme />}
             {active === 'my' && <My />}
             {active === 'file' && <File />}
             {active === 'other' && <Other />}

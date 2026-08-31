@@ -52,7 +52,7 @@ export const sidebarRoutes: RouteGroupConfig[] = [
         subMenu: [
           { path: '/article', name: '文章管理', icon: <MdOutlineArticle className="text-base" /> },
           { path: '/assistant', name: '助手管理', icon: <BiChip className="text-base" /> },
-          { path: '/record', name: '说说管理', icon: <BiMessageSquareDetail className="text-base" /> },
+          { path: '/record', name: '闪念管理', icon: <BiMessageSquareDetail className="text-base" /> },
           { path: '/tag', name: '标签管理', icon: <AiOutlineTags className="text-base" /> },
           { path: '/comment', name: '评论管理', icon: <FaRegComments className="text-base" /> },
           { path: '/wall', name: '留言管理', icon: <BiCommentDetail className="text-base" /> },

@@ -267,7 +267,7 @@ export default function RecordPage() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col text-slate-600 dark:text-slate-300">
-      <Title value="说说管理">
+      <Title value="闪念管理">
         <Link to="/create_record">
           <Button type="primary" icon={<FiPlus />} className="inline-flex items-center gap-1">
             发布闪念
